@@ -1,0 +1,11 @@
+pyenv was installed using instructions README of the following repo:
+https://github.com/pyenv-win/pyenv-win?tab=readme-ov-file#pyenv-win-commands
+
+poetry was installed using pipx using instructions from https://python-poetry.org/docs/basic-usage/#initialising-a-pre-existing-project
+in addition PATH had to be set to the value: C:\Users\YourUserName\AppData\Roaming\Python\Scripts
+for poetry to get the version set from pyenv you have to run:
+poetry config virtualenvs.prefer-active-python true
+
+poetry init -n
+(if versions still dont match, change in file and run poetry update)
+poetry add packagename
