@@ -1,0 +1,17 @@
+gensim
+scipy
+numpy
+pandas
+scikit-learn
+matplotlib
+transformers
+torch 
+pytorch_transformers
+sentence-transformers
+seaborn
+botocore
+boto3
+datasets
+pickle5
+jupyter
+"sentence-transformers[train]"

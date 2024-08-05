@@ -9,3 +9,7 @@ poetry config virtualenvs.prefer-active-python true
 poetry init -n
 (if versions still dont match, change in file and run poetry update)
 poetry add packagename
+foreach ($pkg in Get-Content requirements.txt) { poetry add $pkg }-windows
+gensim had to go first because it requeries numpy i spicy specificly...
+$Env:MPLBACKEND = "TkAgg" in powershel if an error durring import occures
+poetry add $(cat requirements.txt)-linux

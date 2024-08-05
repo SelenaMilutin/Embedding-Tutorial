@@ -1,0 +1,98 @@
+Embedding Models: from Architecture to Implementation https://learn.deeplearning.ai/courses/embedding-models-from-architecture-to-implementation/lesson/1/introduction
+
+1. introduction- embedding models make embeding vectors. We want to use the words around the target word as clues- Word2Vect, then Glove, than BIRT (new networks), Contrastive Loss
+2. intoduction  to embedding models- vector emb map anything into an vector space. similar vectors are closser. its a real vector space where we can use any arimtetic op with vectors. Domain for embedding vectors:
+    image embedding
+    video embedding
+    audio embedding
+    graph embedding 
+clip-multimodal embedding- img to text
+aplications of embedings:
+    llm- as input embeddings
+    semantic search- improving search relevance
+    RAG- efficient retrival of chunks
+    Recommendations- using similarity search
+Retrival engine is of core importance. alg for ranking chunks is Cross Encoder O(n^2). slow and bad for scaling
+alternative we embed each imput and get a dence vector space. we later compare those vectors whis is not as computer demanding, but also not as precise
+
+3. Contextualiyed token embeddings- word emb models do not know context! bat(slepi mis) and bat(palica) are the same to them. attention is all you need tranformers were intodused. we have an encoder and decoder. inputs to these are words and tokens, encoder output is continuous representations. encoder would take spanish sentence as a whole and analize words, decoder takes in word for word and predicts the next word in english, encoder left-right, decoder left.
+bert base and bert large.
+[CSL] beginning token
+[SEP] between sentences
+in bert we have pretraining tasks
+    1. masked language modeling MLM
+        - predikcija tokens of the hidden word
+        15% of all wordpiece tokens are randomly masked- maskira se jer levo desno mozemo da hintujemo sebi sta se dobija i mreza ne uci ustvari
+        model must predict masked token
+        model cann use left and right context
+        task trains the model to produce contextualiyed word embeddings
+        - predikcija if the second sentence goes after the first, are the two sentences correlated
+        predicts if the 2. sentence follows the forst (classification)
+        50% of training data, sentence B follows sentence A
+        Trains a model to understand the relationship between two sentences
+after training we can do Fine-Tuning, we trasfer by this a specific task, for exmp text classification, named entity recognition, question answering
+cross-encoder is a type of classifier takes 2 sentences ceperated by [SEP] and get semantinc similarityes
+
+3. Tocken vs sentence embedding- token can be a word or a sentence. word roken is a word representation and subword token
+is a reasonable caracter sequence (network is net work) bp-bite pair encoding
+first token is CLS and all tokens are converted to token embeddings, every layer
+has a context embedder
+some history:
+USE(Universal sentence encoder)-2018
+SBERT(Sentence Bert)-parovi recenica 2019
+DPR(dense passenger retrieval)
+Sentence-T5
+E5:
+Dragon
+Colbert
+
+We can have 2 goals:
+Pure Similarity
+Question Ranking- rank the given results, in RAG 
+
+these are different tasks ant they led to dual/binary encoders. we have a
+question and answer encoder and are train using contrastive loss
+
+4. Training a dual encoder- we train 2 bert models, one asociated with the question and on with the answer
+CLS embedding of final leyer used for computing dot-product similarity, high produt means a semantic relevant
+Contrastive loss- ensure embedings of similar or positive pair of datapoints are closer together in the embedding space, while the representations of disimular or negative pars are furder apart
+goal: maximise similarity of positive questions/answer pairs
+      minimize similarity of negative questions/answer pairs
+
+CrossEntropyLoss- uses softmax, we want larger values on the diagonal and smaller on the side
+
+5. Embeddings in RAG-each text chunk goes trought answer ancoder and the output goes to a vectorDB
+when user asks we run the query trought a question encoder and compare then to vectors in the vectorDB, and llm
+ANN is used for spead
+
+
+
+
+
+
+
+marqo: https://www.marqo.ai/courses/fine-tuning-embedding-models
+module 5- Introduction to Sentence Transformers
+high-dimensional vectors (also known as embeddings)
+The attention mechanism began to influence further ideas with the infamous paper Attention is All You Need published in 2017 [4]. The authors introduced the transformer model, which eliminated the need for RNNs by using the attention mechanism alone, leading to superior performance and generalization capabilities. This shift revolutionized the NLP ecosystem, moving it away from RNN-based models towards transformers.
+There were two main concerns:
+
+A lot of data was needed to train transformers from scratch
+The architecture may not be complex enough to understand patterns to solve language problems
+To address this issue, BERT was introduced.
+
+One of the most famous pre-trained models is BERT, Bidirectional Encoder Representations from Transformers, by Google AI 
+BERT models can be built in two phases. The first is the pre-training phase where we train the model to understand the language. The second is the fine-tuning phase where we further train the model on a specific task. This addresses the data concern of transformers; if we already have a pre-trained model that understands language then we only need data to fine-tune the model for our specific case.
+Previously, RNNs were mainly built for very specific use-cases and would change depending on that. This is the beauty of transformers; they can be generalized. This means it’s possible to use the same ‘core’ of a model and change the final layers for different use cases. This feature of transformers sparked a whole new type of models in NLP: pretrained models.
+The most obvious solution here would be to pass the input question into BERT to get a single vector that represents that question. Then, compare it against all other questions using something like a cosine similarity metric as explained in this article. The final step would be to return the nearest neighbours as the most related questions. This set up would require us to use the BERT model once and not 10 million times.
+
+The issue with BERT is that it only gives us word vectors so, if you want a sentence vector, you’d need to somehow aggregate the word vectors into a single vector. The most straightforward way to do this would be to take the average of the word vectors. This technique is called mean pooling. This system as outlined in the figure below is the simplest form of sentence transformer.
+Okay great! Well…not so great. The output sentence produced here is actually really poor quality. So poor that you might be better to take the average of GloVe embeddings and not even use BERT! Let’s look at how we can fix that.
+
+Unlike BERT, SBERT allowed for efficient storage and comparison of sentence embeddings, making it highly scalable.
+SBERT is fine-tuned on sentence pairs using a siamese architecture. This means we have two of the exact same BERT sentence transformer networks connected. This can be seen in the Figure below where two separate sentences are passed through the same architecture. In the original SBERT paper, they tested three different pooling methods (mean, max and [CLS]) and mean pooling performed best.
+While BERT processes sentences word by word, SBERT takes full sentences into account, providing a more comprehensive understanding of the text semantics.
+
+
+
+https://medium.com/@rinkinag24/a-comprehensive-guide-to-siamese-neural-networks-3358658c0513
