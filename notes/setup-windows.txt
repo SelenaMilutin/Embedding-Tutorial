@@ -11,5 +11,8 @@ poetry init -n
 poetry add packagename
 foreach ($pkg in Get-Content requirements.txt) { poetry add $pkg }-windows
 gensim had to go first because it requeries numpy i spicy specificly...
-$Env:MPLBACKEND = "TkAgg" in powershel if an error durring import occures
+$Env:MPLBACKEND = "TkAgg" in powershel if an error durring importing matlab occures
 poetry add $(cat requirements.txt)-linux
+
+
+side note: matplotlib version had to be changed from 3.9 to 3.7. othervise it wont install properly on linux
