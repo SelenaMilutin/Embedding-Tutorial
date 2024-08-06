@@ -1,0 +1,8 @@
+u forledu eval threba dodati datasets folde odakle ce se ucitavati dataseti:
+squad skinut sa: https://www.kaggle.com/datasets/aleksacvetanovic/squad-sr?resource=download
+srwac skinut sa (curl sam koristila): https://www.clarin.si/repository/xmlui/handle/11356/1063
+
+kako bi radili: load_dataset("gordicaleksa/serbian-llm-eval-v1", task, trust_remote_code=True) mozda budu morali naredni koraci
+ https://www.kaggle.com/datasets/aleksacvetanovic/squad-sr?resource=download
+ cd lm-evaluation-harness-serbian
+ poetry add -e . ili pip install -e .
