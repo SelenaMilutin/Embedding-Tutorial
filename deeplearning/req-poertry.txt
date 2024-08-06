@@ -15,3 +15,5 @@ datasets
 pickle5
 jupyter
 "sentence-transformers[train]"
+debugpy
+lxml
