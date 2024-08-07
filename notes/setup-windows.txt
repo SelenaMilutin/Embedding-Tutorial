@@ -16,3 +16,6 @@ poetry add $(cat requirements.txt)-linux
 
 
 side note: matplotlib version had to be changed from 3.9 to 3.7. othervise it wont install properly on linux
+
+
+poetry export --without-hashes -f requirements.txt -o requirements.txt
