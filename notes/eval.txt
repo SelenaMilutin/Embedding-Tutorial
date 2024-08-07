@@ -3,6 +3,12 @@ squad skinut sa: https://www.kaggle.com/datasets/aleksacvetanovic/squad-sr?resou
 srwac skinut sa (curl sam koristila): https://www.clarin.si/repository/xmlui/handle/11356/1063
 
 kako bi radili: load_dataset("gordicaleksa/serbian-llm-eval-v1", task, trust_remote_code=True) mozda budu morali naredni koraci
- https://www.kaggle.com/datasets/aleksacvetanovic/squad-sr?resource=download
- cd lm-evaluation-harness-serbian
- poetry add -e . ili pip install -e .
+git clone https://github.com/gordicaleksa/lm-evaluation-harness-serbian
+cd lm-evaluation-harness-serbian
+pip install -e .
+
+
+https://paperswithcode.com/datasets?q=&v=lst&o=match&task=question-answering&mod=texts 
+
+https://huggingface.co/datasets/mandarjoshi/trivia_qa - 
+https://huggingface.co/datasets/facebook/belebele
