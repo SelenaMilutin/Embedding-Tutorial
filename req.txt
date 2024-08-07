@@ -1,0 +1,15 @@
+scipy
+numpy
+pandas
+scikit-learn
+matplotlib
+transformers
+torch 
+pytorch_transformers
+sentence-transformers
+seaborn
+datasets
+jupyter
+debugpy
+lxml
+evaluate
