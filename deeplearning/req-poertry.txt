@@ -1,4 +1,3 @@
-gensim
 scipy
 numpy
 pandas
@@ -9,11 +8,6 @@ torch
 pytorch_transformers
 sentence-transformers
 seaborn
-botocore
-boto3
 datasets
-pickle5
 jupyter
-"sentence-transformers[train]"
-debugpy
 lxml
